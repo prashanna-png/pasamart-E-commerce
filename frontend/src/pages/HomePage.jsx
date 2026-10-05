@@ -19,7 +19,7 @@ function HomePage() {
   };
   useEffect(() => {
     fetchProducts();
-  });
+  },[]);
 
   return (
     <>

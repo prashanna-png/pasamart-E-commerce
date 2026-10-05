@@ -1,47 +1,64 @@
-import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
-import { NavLink, Link } from "react-router-dom";
-import { FaShoppingCart, FaSignInAlt, FaUser } from "react-icons/fa";
+import { Navbar, Nav, Container, NavDropdown, Badge } from "react-bootstrap";
+import { FaShoppingCart, FaUser } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/react.svg";
+import { removeCredentials } from "../slices/authSlice";
+import axios from "axios";
 
 function Header() {
+  const { cartItems } = useSelector((state) => state.cart);
+  const { userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const logoutHandler = async () => {
+    try {
+      const resp = await axios.post("/api/auth/logout");
+      dispatch(removeCredentials());
+      navigate("/login");
+      console.log(resp.data);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
   return (
-    <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
-      <Container>
-        {/* Brand + logo */}
-        <Navbar.Brand
-          as={Link}
-          to="/"
-          className="d-flex align-items-center gap-2"
-        >
-          <img src={logo} alt="HimalayaShop logo" width="30" height="30" />
-          HimalayaShop
-        </Navbar.Brand>
-
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <Nav.Link as={NavLink} to="/cart">
-              <FaShoppingCart /> Cart
-            </Nav.Link>
-
-            <Nav.Link as={NavLink} to="/login">
-              <FaSignInAlt /> Sign In
-            </Nav.Link>
-
-            <NavDropdown title="Account" id="account-dropdown">
-              <NavDropdown.Item as={NavLink} to="/profile">
-                <FaUser /> Profile
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item as={NavLink} to="/logout">
-                Logout
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <header>
+      <Navbar bg="dark" variant="dark" collapseOnSelect expand="md">
+        <Container>
+          <Navbar.Brand as={NavLink} to="/">
+            <img src={logo} alt="logo" />
+            HimalayanShop
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbar" />
+          <Navbar.Collapse id="navbar">
+            <Nav className="ms-auto">
+              <Nav.Link as={NavLink} to="/cart">
+                <FaShoppingCart /> Cart{" "}
+                {cartItems.length > 0 && (
+                  <Badge bg="success" pill>
+                    {cartItems.reduce((acc, item) => acc + Number(item.qty), 0)}
+                  </Badge>
+                )}
+              </Nav.Link>
+              {userInfo ? (
+                <>
+                  <NavDropdown title={userInfo.fullname}>
+                    <NavDropdown.Item>Profile</NavDropdown.Item>
+                    <NavDropdown.Item onClick={logoutHandler}>
+                      Logout
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </>
+              ) : (
+                <Nav.Link as={NavLink} to="/login">
+                  <FaUser /> Login
+                </Nav.Link>
+              )}
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </header>
   );
 }
 

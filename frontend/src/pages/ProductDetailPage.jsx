@@ -1,20 +1,16 @@
-/* eslint-disable react-hooks/set-state-in-effect */
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
-
-import {
-  Row,
-  Col,
-  Image,
-  ListGroup,
-  Button,
-  Form,
-} from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
+import { Row, Col, Image, ListGroup, Button, Form } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import Rating from "../components/Ratings";
+import { addToCart } from "../slices/cartSlice";
 
 function ProductDetailPage() {
+  const [qty, setQty] = useState(1);
   const { id } = useParams();
+  const dispatch = useDispatch();
   const [product, setProduct] = useState({});
+
   const fetchProductById = async () => {
     try {
       const resp = await fetch("/api/products/" + id);
@@ -24,9 +20,12 @@ function ProductDetailPage() {
       console.log(err.message);
     }
   };
+
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchProductById();
-  });
+  }, [id]);
+
   return (
     <>
       <Link to="/" className="btn btn-light my-2">
@@ -68,28 +67,27 @@ function ProductDetailPage() {
                 </Col>
               </Row>
             </ListGroup.Item>
-
             {product.countInStock != 0 && (
               <ListGroup.Item>
                 <Row>
-                  <Col>Qty</Col>
+                  <Col>Qty:</Col>
                   <Col>
-                    <Form.Select>
-                      {[...Array(product.countInStock).keys()].map((x) => {
-                        return (
-                          <option key={x + 1}>
-                            {x + 1}
-                          </option>
-                        );
-                      })}
+                    <Form.Select onChange={(e) => setQty(e.target.value)}>
+                      {[...Array(product.countInStock).keys()].map((x) => (
+                        <option key={x + 1}>{x + 1}</option>
+                      ))}
                     </Form.Select>
                   </Col>
                 </Row>
               </ListGroup.Item>
             )}
-
             <ListGroup.Item>
-              <Button variant="dark">Add to Cart</Button>
+              <Button
+                variant="dark"
+                onClick={() => dispatch(addToCart({ ...product, qty }))}
+              >
+                Add to Cart
+              </Button>
             </ListGroup.Item>
           </ListGroup>
         </Col>
