@@ -36,13 +36,13 @@ function Header() {
                 <FaShoppingCart /> Cart{" "}
                 {cartItems.length > 0 && (
                   <Badge bg="success" pill>
-                    {cartItems.reduce((acc, item) => acc + Number(item.qty), 0)}
+                    {cartItems.length}
                   </Badge>
                 )}
               </Nav.Link>
               {userInfo ? (
                 <>
-                  <NavDropdown title={userInfo.fullname}>
+                  <NavDropdown title={userInfo.fullName}>
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                     <NavDropdown.Item onClick={logoutHandler}>
                       Logout

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import { setCredentials } from "../slices/authSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
@@ -53,9 +53,13 @@ function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
+        
         <Button type="submit" variant="dark" className="my-2">
           Login
         </Button>
+        <div className="text-center mt-3">
+          Don't have an account? <Link to="/signup">Create an account</Link>
+        </div>
       </Form>
     </FormContainer>
   );
