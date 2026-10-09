@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import { setCredentials } from "../slices/authSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
@@ -10,13 +10,20 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { userInfo } = useSelector((state) => state.auth);
+  const { search } = useLocation();
+  const sp = new URLSearchParams(search);
+  const redirect = sp.get("redirect") || "/";
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
     if (userInfo) {
-      navigate("/");
+      if (userInfo.isAdmin) {
+        navigate("/admin/products");
+      } else {
+        navigate(redirect);
+      }
     }
-  }, [userInfo, navigate]);
+  }, [userInfo, redirect, navigate]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -53,16 +60,20 @@ function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        
         <Button type="submit" variant="dark" className="my-2">
           Login
         </Button>
-        <div className="text-center mt-3">
-          Don't have an account? <Link to="/signup">Create an account</Link>
-        </div>
       </Form>
     </FormContainer>
   );
 }
 
 export default LoginPage;
+
+// checkout page summary
+// shipping address:adress, city, postal code, country
+// 2 payment method: cod or esewa
+
+// right shide: shhipping site
+
+//place order also

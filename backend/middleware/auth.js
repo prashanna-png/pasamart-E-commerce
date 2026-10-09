@@ -11,7 +11,7 @@ const checkAuth = async (req, res, next) => {
     }
 
     try {
-        const { _id } = jwt.verify(token, "process.env.JWT_SECRET_KEY");
+        const { _id } = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
         const user = await User.findById(_id);
 
