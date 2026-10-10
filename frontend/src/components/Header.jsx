@@ -27,19 +27,26 @@ function Header() {
         <Container>
           <Navbar.Brand as={NavLink} to="/">
             <img src={logo} alt="logo" />
-            HimalayanShop
+            Pasamart
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar" />
           <Navbar.Collapse id="navbar">
             <Nav className="ms-auto">
-              <Nav.Link as={NavLink} to="/cart">
-                <FaShoppingCart /> Cart{" "}
-                {cartItems.length > 0 && (
-                  <Badge bg="success" pill>
-                    {cartItems.length}
-                  </Badge>
-                )}
-              </Nav.Link>
+              {userInfo?.isAdmin ? (
+                <Nav.Link as={NavLink} to="/admin/products">
+                  Manage Products
+                </Nav.Link>
+              ) : (
+                <Nav.Link as={NavLink} to="/cart">
+                  <FaShoppingCart /> Cart{" "}
+                  {cartItems.length > 0 && (
+                    <Badge bg="success" pill>
+                      {cartItems.length}
+                    </Badge>
+                  )}
+                </Nav.Link>
+              )}
+
               {userInfo ? (
                 <>
                   <NavDropdown title={userInfo.fullName}>

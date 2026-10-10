@@ -4,7 +4,7 @@ function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer style={styles.footer}>
+    <footer style={styles.footer} className="footer">
       <div style={styles.container}>
         {/* Column 1: Brand / about */}
         <div style={styles.col}>

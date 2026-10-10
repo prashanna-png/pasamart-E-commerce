@@ -64,8 +64,18 @@ function PlaceOrderPage() {
                 {cart.cartItems.map((item) => (
                   <ListGroup.Item key={item._id}>
                     <Row>
-                      <Col md={1}>
-                        <Image src={item.image} fluid rounded />
+                      <Col md={2}>
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          fluid
+                          rounded
+                          style={{
+                            height: "80px",
+                            width: "80px",
+                            objectFit: "cover",
+                          }}
+                        />
                       </Col>
                       <Col>
                         <Link to={`/product/${item._id}`}>{item.name}</Link>

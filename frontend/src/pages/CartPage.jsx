@@ -34,7 +34,17 @@ function CartPage() {
                 <ListGroup.Item key={item._id}>
                   <Row>
                     <Col md={2}>
-                      <Image src={item.image} alt={item.name} fluid rounded />
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fluid
+                        rounded
+                        style={{
+                          height: "80px",
+                          width: "80px",
+                          objectFit: "cover",
+                        }}
+                      />
                     </Col>
                     <Col md={4}>
                       <Link to={`/product/${item._id}`}>{item.name}</Link>

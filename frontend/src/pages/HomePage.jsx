@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 
 function HomePage() {
   const [products, setProducts] = useState([]);
+
   const fetchProducts = async () => {
     try {
       const resp = await fetch("/api/products");
@@ -14,6 +15,7 @@ function HomePage() {
       console.log(err.message);
     }
   };
+
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -21,11 +23,10 @@ function HomePage() {
   return (
     <>
       <h2>Latest Products</h2>
-      {/* <Product product={products[1]} /> */}
       <Container>
-        <Row>
+        <Row xs={1} sm={2} md={3} lg={4} className="g-4">
           {products.map((p) => (
-            <Col sm={12} md={6} lg={4} xl={3}>
+            <Col key={p._id}>
               <Product product={p} />
             </Col>
           ))}

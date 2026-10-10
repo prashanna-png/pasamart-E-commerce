@@ -4,9 +4,9 @@ import Rating from "./Ratings";
 
 function Product({ product }) {
   return (
-    <Card className="my-3 p-3 rounded">
+    <Card className="my-3 p-3 rounded product-card">
       <Link to={`/products/${product._id}`}>
-        <Card.Img src={product.image} variant="top" />
+        <Card.Img src={product.image}  variant="top" className="product-img" />
       </Link>
 
       <Card.Body>
@@ -19,12 +19,12 @@ function Product({ product }) {
           </Link>
         </Card.Title>
 
-        <Card.Text as="h4">${product.price}</Card.Text>
+        <Card.Text as="h4">Rs.{product.price}</Card.Text>
 
         <Card.Text as="div">
           <Rating
             value={product.rating}
-            text={`${product.numReviews} reviews`}
+            text={`${product.numReviews} `}
           />
         </Card.Text>
       </Card.Body>

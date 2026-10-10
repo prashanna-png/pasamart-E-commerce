@@ -2,11 +2,12 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Button, Form } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Rating from "../components/Ratings";
 import { addToCart } from "../slices/cartSlice";
 
 function ProductDetailPage() {
+  const { userInfo } = useSelector((state) => state.auth);
   const [qty, setQty] = useState(1);
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -82,14 +83,19 @@ function ProductDetailPage() {
                 </Row>
               </ListGroup.Item>
             )}
-            <ListGroup.Item>
-              <Button
-                variant="dark"
-                onClick={() => dispatch(addToCart({ ...product, qty }))}
-              >
-                Add to Cart
-              </Button>
-            </ListGroup.Item>
+
+            {userInfo?.isAdmin ? (
+              ""
+            ) : (
+              <ListGroup.Item>
+                <Button
+                  variant="dark"
+                  onClick={() => dispatch(addToCart({ ...product, qty }))}
+                >
+                  Add to Cart
+                </Button>
+              </ListGroup.Item>
+            )}
           </ListGroup>
         </Col>
       </Row>

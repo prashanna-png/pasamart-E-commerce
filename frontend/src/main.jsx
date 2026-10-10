@@ -36,13 +36,13 @@ createRoot(document.getElementById("root")).render(
             <Route path="order/:id" Component={OrderDetailPage} />
           </Route>
           <Route element={<AdminRoute />}>
-            <Route path="/admin/products" element={<AdminProductListPage />} />
+            <Route path="admin/products" element={<AdminProductListPage />} />
             <Route
-              path="/admin/products/add"
+              path="admin/products/add"
               element={<AdminProductAddPage />}
             />
             <Route
-              path="/admin/products/:id/edit"
+              path="admin/products/:id/edit"
               element={<AdminProductEditPage />}
             />
           </Route>
