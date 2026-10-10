@@ -24,6 +24,10 @@ function AdminProductListPage() {
   const addProductHandler = () => navigate("/admin/products/add");
 
   const deleteHandler = async (id) => {
+    const confirmed = window.confirm("are you sure?");
+    if(!confirmed){
+      return
+    }
     try {
       await axios.delete(`/api/products/${id}`, {
         withCredentials: true,
@@ -41,7 +45,7 @@ function AdminProductListPage() {
         <Col lg={10}>
           <h2>Manage Products</h2>
         </Col>
-        <Col lg={2}>
+        <Col lg={2} className="my-3">
           <Button onClick={addProductHandler}>+ Add Product</Button>
         </Col>
       </Row>
@@ -76,7 +80,7 @@ function AdminProductListPage() {
                     <Button
                       variant="outline-primary"
                       size="sm"
-                      className="me-2"
+                      className="me-2 my-2"
                       onClick={()=>navigate(`/admin/products/${product._id}/edit`)}
                     >
                       Edit

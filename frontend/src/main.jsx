@@ -15,6 +15,7 @@ import PrivateRoute from "./components/PrivateRoute.jsx";
 import PlaceOrderPage from "./pages/PlaceOrderPage.jsx";
 import OrderDetailPage from "./pages/OrderDetailPage.jsx";
 
+import AdminRoute from "./components/AdminRoute.jsx";
 import AdminProductListPage from "./pages/AdminProductListPage.jsx";
 import AdminProductAddPage from "./pages/AdminProductAddPage.jsx";
 import AdminProductEditPage from "./pages/AdminProductEditPage.jsx";
@@ -34,15 +35,17 @@ createRoot(document.getElementById("root")).render(
             <Route path="placeorder" Component={PlaceOrderPage} />
             <Route path="order/:id" Component={OrderDetailPage} />
           </Route>
-          <Route path="admin/products" Component={AdminProductListPage} />
-          <Route
-            path="/admin/products/add"
-            Component={AdminProductAddPage}
-          ></Route>
-          <Route
-            path="admin/products/:id/edit"
-            element={<AdminProductEditPage />}
-          />
+          <Route element={<AdminRoute />}>
+            <Route path="/admin/products" element={<AdminProductListPage />} />
+            <Route
+              path="/admin/products/add"
+              element={<AdminProductAddPage />}
+            />
+            <Route
+              path="/admin/products/:id/edit"
+              element={<AdminProductEditPage />}
+            />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
