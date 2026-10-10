@@ -3,14 +3,14 @@ import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function ProductForm() {
+function ProductForm({ product }) {
   const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    price: "",
-    brand: "",
-    category: "",
-    countInStock: "",
+    name: product?.name || "",
+    description: product?.description || "",
+    price: product?.price ?? "",
+    brand: product?.brand || "",
+    category: product?.category || "",
+    countInStock: product?.countInStock ?? "",
   });
 
   const [image, setImage] = useState(null);
@@ -26,26 +26,38 @@ function ProductForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const imageData = new FormData();
-      imageData.append("image", image);
 
-      const uploadResp = await axios.post("/api/upload", imageData, {
-        withCredentials: true,
-      });
+    try {
+      let imageUrl = product?.image || "";
+
+      if (image) {
+        const imageData = new FormData();
+        imageData.append("image", image);
+
+        const uploadResp = await axios.post("/api/upload", imageData, {
+          withCredentials: true,
+        });
+
+        imageUrl = uploadResp.data.image;
+      }
 
       const productData = {
         ...formData,
         price: Number(formData.price),
         countInStock: Number(formData.countInStock),
-        image: uploadResp.data.image,
+        image: imageUrl,
       };
 
-      const productResp = await axios.post("/api/products", productData, {
-        withCredentials: true,
-      });
+      if (product) {
+        await axios.put(`/api/products/${product._id}`, productData, {
+          withCredentials: true,
+        });
+      } else {
+        await axios.post("/api/products", productData, {
+          withCredentials: true,
+        });
+      }
 
-      console.log(productResp.data.message);
       navigate("/admin/products");
     } catch (err) {
       console.log("Status:", err.response?.status);
@@ -126,12 +138,12 @@ function ProductForm() {
             name="image"
             accept="image/*"
             onChange={(e) => setImage(e.target.files[0])}
-            required
+            required={!product}
           />
         </Form.Group>
 
         <Button type="submit" variant="primary">
-          Create Product
+          {product ? "update product" : "create product"}
         </Button>
       </Form>
     </>

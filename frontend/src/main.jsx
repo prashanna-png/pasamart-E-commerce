@@ -16,7 +16,8 @@ import PlaceOrderPage from "./pages/PlaceOrderPage.jsx";
 import OrderDetailPage from "./pages/OrderDetailPage.jsx";
 
 import AdminProductListPage from "./pages/AdminProductListPage.jsx";
-import AdminProductAddPage from "./pages/AdminProductAddPage.jsx"
+import AdminProductAddPage from "./pages/AdminProductAddPage.jsx";
+import AdminProductEditPage from "./pages/AdminProductEditPage.jsx";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -38,6 +39,10 @@ createRoot(document.getElementById("root")).render(
             path="/admin/products/add"
             Component={AdminProductAddPage}
           ></Route>
+          <Route
+            path="admin/products/:id/edit"
+            element={<AdminProductEditPage />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

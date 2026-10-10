@@ -77,6 +77,7 @@ function AdminProductListPage() {
                       variant="outline-primary"
                       size="sm"
                       className="me-2"
+                      onClick={()=>navigate(`/admin/products/${product._id}/edit`)}
                     >
                       Edit
                     </Button>
