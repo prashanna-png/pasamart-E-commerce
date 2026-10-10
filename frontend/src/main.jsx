@@ -16,6 +16,7 @@ import PlaceOrderPage from "./pages/PlaceOrderPage.jsx";
 import OrderDetailPage from "./pages/OrderDetailPage.jsx";
 
 import AdminProductListPage from "./pages/AdminProductListPage.jsx";
+import AdminProductAddPage from "./pages/AdminProductAddPage.jsx"
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -33,6 +34,10 @@ createRoot(document.getElementById("root")).render(
             <Route path="order/:id" Component={OrderDetailPage} />
           </Route>
           <Route path="admin/products" Component={AdminProductListPage} />
+          <Route
+            path="/admin/products/add"
+            Component={AdminProductAddPage}
+          ></Route>
         </Route>
       </Routes>
     </BrowserRouter>

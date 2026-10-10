@@ -1,9 +1,12 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Col, Container, Row, Table } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 function AdminProductListPage() {
+  const navigate = useNavigate();
+
   const [products, setProducts] = useState([]);
   const fetchProducts = async () => {
     try {
@@ -18,23 +21,30 @@ function AdminProductListPage() {
     fetchProducts();
   }, []);
 
-  const deleteHandler = async (id) => {
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this product?",
-    );
-    if (!confirmed) return;
+  const addProductHandler = () => navigate("/admin/products/add");
 
+  const deleteHandler = async (id) => {
     try {
-      await axios.delete(`/api/products/${id}`);
+      await axios.delete(`/api/products/${id}`, {
+        withCredentials: true,
+      });
       await fetchProducts();
     } catch (err) {
-      console.log(err.message);
+      console.log("Status:", err.response?.status);
+      console.log("Error:", err.response?.data);
     }
   };
 
   return (
     <>
-      <h2>Manage Products</h2>
+      <Row>
+        <Col lg={10}>
+          <h2>Manage Products</h2>
+        </Col>
+        <Col lg={2}>
+          <Button onClick={addProductHandler}>+ Add Product</Button>
+        </Col>
+      </Row>
       <Container>
         <Table striped bordered hover responsive>
           <thead>
