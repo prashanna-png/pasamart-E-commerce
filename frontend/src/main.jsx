@@ -20,6 +20,8 @@ import AdminProductListPage from "./pages/AdminProductListPage.jsx";
 import AdminProductAddPage from "./pages/AdminProductAddPage.jsx";
 import AdminProductEditPage from "./pages/AdminProductEditPage.jsx";
 
+import ProfilePage from "./pages/ProfilePage.jsx";
+
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <BrowserRouter>
@@ -27,6 +29,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/" Component={App}>
           <Route path="" Component={HomePage} />
           <Route path="products/:id" Component={ProductDetailPage} />
+          <Route path="profile" Component={ProfilePage} />
           <Route path="login" Component={LoginPage} />
           <Route path="cart" Component={CartPage} />
           <Route path="" Component={PrivateRoute}>

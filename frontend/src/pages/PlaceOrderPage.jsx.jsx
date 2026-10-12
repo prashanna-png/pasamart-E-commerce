@@ -81,7 +81,7 @@ function PlaceOrderPage() {
                         <Link to={`/product/${item._id}`}>{item.name}</Link>
                       </Col>
                       <Col md={4}>
-                        ${item.price} X {item.qty} = ${item.price * item.qty}
+                        Rs. {item.price} X {item.qty} = ${item.price * item.qty}
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -99,25 +99,25 @@ function PlaceOrderPage() {
               <ListGroup.Item>
                 <Row>
                   <Col>Items:</Col>
-                  <Col>${cart.itemPrice}</Col>
+                  <Col>Rs. {cart.itemPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Shipping:</Col>
-                  <Col>${cart.shippingCharge}</Col>
+                  <Col>Rs. {cart.shippingCharge}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Tax:</Col>
-                  <Col>${cart.taxPrice}</Col>
+                  <Col>Rs. {cart.taxPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Total:</Col>
-                  <Col>${cart.totalPrice}</Col>
+                  <Col>Rs. {cart.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>

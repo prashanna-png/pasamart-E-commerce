@@ -134,7 +134,7 @@ function OrderDetailPage() {
                           </Col>
 
                           <Col md={4}>
-                            ${item.price} × {item.quantity} = $
+                            Rs. {item.price} × {item.quantity} = $
                             {(item.price * item.quantity).toFixed(2)}
                           </Col>
                         </Row>
@@ -157,17 +157,17 @@ function OrderDetailPage() {
                 <ListGroup.Item>
                   <Row>
                     <Col>Items</Col>
-                    <Col>${order.itemsPrice}</Col>
+                    <Col>Rs. {order.itemsPrice}</Col>
                   </Row>
 
                   <Row>
                     <Col>Shipping</Col>
-                    <Col>${order.shippingPrice}</Col>
+                    <Col>Rs. {order.shippingPrice}</Col>
                   </Row>
 
                   <Row>
                     <Col>Tax</Col>
-                    <Col>${order.taxPrice}</Col>
+                    <Col>Rs. {order.taxPrice}</Col>
                   </Row>
 
                   <Row>
@@ -175,7 +175,7 @@ function OrderDetailPage() {
                       <strong>Total</strong>
                     </Col>
                     <Col>
-                      <strong>${order.totalPrice}</strong>
+                      <strong>Rs. {order.totalPrice}</strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>

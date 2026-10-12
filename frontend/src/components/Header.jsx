@@ -1,8 +1,17 @@
-import { Navbar, Nav, Container, NavDropdown, Badge } from "react-bootstrap";
+import {
+  Navbar,
+  Nav,
+  Container,
+  NavDropdown,
+  Badge,
+  Form,
+  Button,
+} from "react-bootstrap";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
+import { MdLocalGroceryStore } from "react-icons/md";
+
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import logo from "../assets/react.svg";
 import { removeCredentials } from "../slices/authSlice";
 import axios from "axios";
 
@@ -23,12 +32,46 @@ function Header() {
   };
   return (
     <header>
-      <Navbar bg="dark" variant="dark" collapseOnSelect expand="md">
+      <Navbar
+        bg="dark"
+        variant="dark"
+        collapseOnSelect
+        expand="md"
+        className="py-3"
+      >
         <Container>
           <Navbar.Brand as={NavLink} to="/">
-            <img src={logo} alt="logo" />
-            Pasamart
+            <span class="fw-bold fs-4">
+              <MdLocalGroceryStore />
+              Pasa<span style={{ color: "#F59E0B" }}>mart</span>
+            </span>
           </Navbar.Brand>
+          <Form
+            className="d-flex mx-auto"
+            style={{
+              position: "absolute",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "40%",
+              maxWidth: "600px",
+            }}
+          >
+            <Form.Control
+              type="search"
+              placeholder="Search"
+              className="me-2"
+              aria-label="Search"
+            />
+            <Button
+              style={{
+                backgroundColor: "#F59E0B",
+                border: "none",
+                color: "black",
+              }}
+            >
+              Search
+            </Button>
+          </Form>
           <Navbar.Toggle aria-controls="navbar" />
           <Navbar.Collapse id="navbar">
             <Nav className="ms-auto">
@@ -40,7 +83,11 @@ function Header() {
                 <Nav.Link as={NavLink} to="/cart">
                   <FaShoppingCart /> Cart{" "}
                   {cartItems.length > 0 && (
-                    <Badge bg="success" pill>
+                    <Badge
+                      pill
+                      bg=""
+                      style={{ backgroundColor: "#F59E0B", color: "#000" }}
+                    >
                       {cartItems.length}
                     </Badge>
                   )}
@@ -50,7 +97,9 @@ function Header() {
               {userInfo ? (
                 <>
                   <NavDropdown title={userInfo.fullName}>
-                    <NavDropdown.Item>Profile</NavDropdown.Item>
+                    <NavDropdown.Item as={NavLink} to="/profile">
+                      Profile
+                    </NavDropdown.Item>
                     <NavDropdown.Item onClick={logoutHandler}>
                       Logout
                     </NavDropdown.Item>

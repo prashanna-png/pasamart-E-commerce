@@ -45,7 +45,7 @@ function ProductDetailPage() {
             <ListGroup.Item>
               <Rating value={product.rating} text={product.numReviews} />
             </ListGroup.Item>
-            <ListGroup.Item>${product.price}</ListGroup.Item>
+            <ListGroup.Item>Rs. {product.price}</ListGroup.Item>
             <ListGroup.Item>{product.description}</ListGroup.Item>
           </ListGroup>
         </Col>
@@ -55,7 +55,7 @@ function ProductDetailPage() {
               <Row>
                 <Col>Price:</Col>
                 <Col>
-                  <strong>${product.price}</strong>
+                  <strong>Rs.{product.price}</strong>
                 </Col>
               </Row>
             </ListGroup.Item>

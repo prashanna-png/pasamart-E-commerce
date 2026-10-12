@@ -1,5 +1,5 @@
 .rating svg {
-  color: rgb(255, 166, 0);
+  color: #B45309;
 }
 .rating-text {
   font-size: 0.8rem;
@@ -31,4 +31,20 @@
   object-fit: cover;
   border-radius: 6px;
   margin-bottom: 0.75rem;
+}
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
 }

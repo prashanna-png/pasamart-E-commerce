@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Spinner from "react-bootstrap/Spinner";
 
 function ProductForm({ product }) {
   const [formData, setFormData] = useState({
@@ -12,7 +13,7 @@ function ProductForm({ product }) {
     category: product?.category || "",
     countInStock: product?.countInStock ?? "",
   });
-
+  const [loading, setLoading] = useState(false);
   const [image, setImage] = useState(null);
   const navigate = useNavigate();
 
@@ -26,6 +27,7 @@ function ProductForm({ product }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       let imageUrl = product?.image || "";
@@ -57,11 +59,12 @@ function ProductForm({ product }) {
           withCredentials: true,
         });
       }
-
       navigate("/admin/products");
     } catch (err) {
       console.log("Status:", err.response?.status);
       console.log("Error:", err.response?.data || err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -142,8 +145,24 @@ function ProductForm({ product }) {
           />
         </Form.Group>
 
-        <Button type="submit" variant="primary">
-          {product ? "update product" : "create product"}
+        <Button type="submit" variant="primary" disabled={loading}>
+          {loading ? (
+            <>
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+                className="me-2"
+              />
+              Saving...
+            </>
+          ) : product ? (
+            "Update Product"
+          ) : (
+            "Create Product"
+          )}
         </Button>
       </Form>
     </>

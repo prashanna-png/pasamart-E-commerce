@@ -49,7 +49,7 @@ function CartPage() {
                     <Col md={4}>
                       <Link to={`/product/${item._id}`}>{item.name}</Link>
                     </Col>
-                    <Col md={2}>${item.price}</Col>
+                    <Col md={2}>Rs. {item.price}</Col>
                     <Col md={2}>
                       <Form.Control
                         as="select"
@@ -87,7 +87,7 @@ function CartPage() {
               </h3>
             </ListGroup.Item>
             <ListGroup.Item>
-              <strong>${totalPrice}</strong>
+              <strong>Rs. {totalPrice}</strong>
             </ListGroup.Item>
             <ListGroup.Item>
               <Link className="btn btn-dark" to="/login?redirect=/shipping">
