@@ -1,8 +1,8 @@
-# HimalayanShop 🏔️
+# PasaMart 🏔️
 
 A full-stack e-commerce web application built with the **MERN stack (MongoDB, Express.js, React, and Node.js)**.
 
-HimalayanShop is a learning project focused on building a functional e-commerce platform with a customer storefront, product management, authentication, and a protected admin dashboard.
+PasaMart is a learning project focused on building a functional e-commerce platform with a customer storefront, product management, authentication, and a protected admin dashboard.
 
 ## 🛠️ Tech Stack
 
@@ -53,34 +53,6 @@ HimalayanShop is a learning project focused on building a functional e-commerce 
 - Authentication middleware for protected routes
 - Role-based access control for admin operations
 - CORS configuration for credential-based requests
-
-## 📁 Project Structure
-
-```text
-ecommerce/
-├── backend/
-│   ├── config/
-│   ├── controllers/
-│   ├── middleware/
-│   ├── models/
-│   ├── routes/
-│   ├── uploads/
-│   ├── app.js
-│   └── package.json
-├── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── redux/
-│   │   └── ...
-│   ├── package.json
-│   └── vite.config.js
-├── .gitignore
-└── README.md
-```
-
-_Adjust the directory tree to match your actual project structure._
 
 ## 🚀 Getting Started
 
@@ -162,7 +134,7 @@ This forwards frontend requests beginning with `/api` to the Express backend dur
 
 ## 🔐 Authentication
 
-HimalayanShop uses JWT-based authentication with HTTP-only cookies.
+PasaMart uses JWT-based authentication with HTTP-only cookies.
 
 - Users can register and log in.
 - Passwords are hashed before being stored.
@@ -184,7 +156,7 @@ Planned improvements as development continues:
 
 ## 🎯 Project Goal
 
-The goal of HimalayanShop is to develop practical full-stack development skills by building an e-commerce application incrementally, covering REST APIs, authentication, frontend state management, product management, and order processing.
+The goal of PasaMart is to develop practical full-stack development skills by building an e-commerce application incrementally, covering REST APIs, authentication, frontend state management, product management, and order processing.
 
 ## 📄 License
 
