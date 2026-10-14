@@ -7,13 +7,11 @@ function App() {
   return (
     <div className="app-container">
       <Header />
-
       <main className="main-content mt-5">
         <Container>
           <Outlet />
         </Container>
       </main>
-
       <Footer />
     </div>
   );
