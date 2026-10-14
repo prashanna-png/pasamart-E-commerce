@@ -66,8 +66,8 @@ PasaMart is a learning project focused on building a functional e-commerce platf
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/prashanna-png/ecommerce.git
-cd ecommerce
+git clone https://github.com/prashanna-png/pasamart-E-commerce.git
+cd pasamart-E-commerce
 ```
 
 ### 2. Set Up the Backend
@@ -81,7 +81,7 @@ Create a `.env` file inside the `backend` directory:
 
 ```env
 PORT=3000
-MONGO_URI=mongodb://localhost:27017/himalayanshop
+MONGO_URI=mongodb://localhost:27017/pasamart
 JWT_SECRET_KEY=replace_with_a_long_random_secret
 NODE_ENV=development
 ```
