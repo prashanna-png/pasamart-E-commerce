@@ -5,7 +5,6 @@ import {
   NavDropdown,
   Badge,
   Form,
-  Button,
 } from "react-bootstrap";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { MdLocalGroceryStore } from "react-icons/md";
@@ -20,6 +19,7 @@ function Header() {
   const { userInfo } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const logoutHandler = async () => {
     try {
       const resp = await axios.post("/api/auth/logout");
@@ -30,6 +30,7 @@ function Header() {
       console.log(err.message);
     }
   };
+
   return (
     <header>
       <Navbar
@@ -37,15 +38,17 @@ function Header() {
         variant="dark"
         collapseOnSelect
         expand="md"
+        sticky="top"
         className="py-3"
       >
         <Container>
           <Navbar.Brand as={NavLink} to="/">
-            <span class="fw-bold fs-4">
+            <span className="fw-bold fs-4">
               <MdLocalGroceryStore />
               Pasa<span style={{ color: "#F59E0B" }}>mart</span>
             </span>
           </Navbar.Brand>
+
           <Form
             className="d-flex mx-auto"
             style={{
@@ -62,16 +65,8 @@ function Header() {
               className="me-2"
               aria-label="Search"
             />
-            <Button
-              style={{
-                backgroundColor: "#F59E0B",
-                border: "none",
-                color: "black",
-              }}
-            >
-              Search
-            </Button>
           </Form>
+
           <Navbar.Toggle aria-controls="navbar" />
           <Navbar.Collapse id="navbar">
             <Nav className="ms-auto">
@@ -95,16 +90,14 @@ function Header() {
               )}
 
               {userInfo ? (
-                <>
-                  <NavDropdown title={userInfo.fullName}>
-                    <NavDropdown.Item as={NavLink} to="/profile">
-                      Profile
-                    </NavDropdown.Item>
-                    <NavDropdown.Item onClick={logoutHandler}>
-                      Logout
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                </>
+                <NavDropdown title={userInfo.fullName}>
+                  <NavDropdown.Item as={NavLink} to="/profile">
+                    Profile
+                  </NavDropdown.Item>
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
               ) : (
                 <Nav.Link as={NavLink} to="/login">
                   <FaUser /> Login

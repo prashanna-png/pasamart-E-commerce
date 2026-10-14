@@ -29,13 +29,7 @@ function OrderDetailPage() {
     fetchOrderById();
   }, []);
 
-  const handleOrderDelivery = async () => {
-    try {
-      console.log("");
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
+
 
   const handlePayment = async () => {
     const res = await axios.get(`/api/orders/${order._id}/getpaymentdetails`);
@@ -73,7 +67,6 @@ function OrderDetailPage() {
         <Row>
           <Col md={8}>
             <ListGroup variant="flush">
-              {/* User + Shipping Address */}
               <ListGroup.Item>
                 <div style={{ lineHeight: "20px" }}>
                   <p>
@@ -103,7 +96,6 @@ function OrderDetailPage() {
                 </p>
               </ListGroup.Item>
 
-              {/* Payment */}
               <ListGroup.Item>
                 <p>
                   <strong>Payment Method:</strong>{" "}
@@ -116,7 +108,6 @@ function OrderDetailPage() {
                 </p>
               </ListGroup.Item>
 
-              {/* Ordered Items */}
               {order?.orderedItems && (
                 <ListGroup.Item>
                   <ListGroup>
@@ -134,7 +125,7 @@ function OrderDetailPage() {
                           </Col>
 
                           <Col md={4}>
-                            Rs. {item.price} × {item.quantity} = $
+                            Rs. {item.price} × {item.quantity} = Rs.
                             {(item.price * item.quantity).toFixed(2)}
                           </Col>
                         </Row>
