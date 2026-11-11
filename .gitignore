@@ -1,6 +1,22 @@
+# Dependencies
 node_modules/
+
+# Environment variables
 .env
+.env.*
+!.env.example
+
+# Uploaded files
 uploads/
 
-package.json
-package-lock.json
+# Build files
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db

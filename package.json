@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon --env-file=.env backend/app.js"
+    "server": "nodemon --env-file=backend/.env backend/app.js"
   },
   "keywords": [],
   "author": "",

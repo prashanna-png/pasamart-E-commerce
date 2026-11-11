@@ -81,7 +81,8 @@ function PlaceOrderPage() {
                         <Link to={`/product/${item._id}`}>{item.name}</Link>
                       </Col>
                       <Col md={4}>
-                        Rs. {item.price} X {item.qty} = Rs. {item.price * item.qty}
+                        Rs. {item.price} X {item.qty} = Rs.{" "}
+                        {item.price * item.qty}
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -117,7 +118,7 @@ function PlaceOrderPage() {
               <ListGroup.Item>
                 <Row>
                   <Col>Total:</Col>
-                  <Col>Rs. {cart.totalPrice}</Col>
+                  <Col>Rs. {Number(cart.totalPrice).toFixed(2)}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
